@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+const program = require("commander");
+const path = require("path");
+
+const generate = require("../lib/generate");
+const download = require('../lib/download');
+
+program
+  .usage("<template-name> [project-name]")
+  // .option("-c, --clone", "use git clone")
+  // .option("-o, --offline", "use cached template")
+  .parse(process.argv);
+
+const template = program.args[0];
+const project = program.args[1];
+
+download(template, project, err => {
+  console.log('Generated "%s".', project);
+});
+
+// generate(
+//   project,
+//   path.resolve(__dirname, "../templates/" + template),
+//   process.cwd(),
+//   function(err) {
+//     if (err) throw new Error(err);
+//     console.log("done");
+//   }
+// );

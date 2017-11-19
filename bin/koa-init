@@ -1,29 +1,27 @@
 #!/usr/bin/env node
 const program = require("commander");
 const path = require("path");
+const home = require("user-home");
+const chalk = require("chalk");
 
 const generate = require("../lib/generate");
-const download = require('../lib/download');
+const download = require("../lib/download");
 
-program
-  .usage("<template-name> [project-name]")
-  // .option("-c, --clone", "use git clone")
-  // .option("-o, --offline", "use cached template")
-  .parse(process.argv);
+program.usage("<template-name> [project-name]").parse(process.argv);
 
 const template = program.args[0];
 const project = program.args[1];
+const inPlace = !project || project === ".";
+const name = inPlace ? path.relative("../", process.cwd()) : project;
+const to = path.resolve(project || ".");
 
-download(template, project, err => {
-  console.log('Generated "%s".', project);
+const tmp = path.join(home, ".koajs-templates", template);
+download(template, tmp, err => {
+  if (err) throw err;
+  generate(name, tmp, to, err => {
+    if (err) throw err;
+    console.log();
+    console.log(chalk.green("Generated %s."), name);
+    console.log();
+  });
 });
-
-// generate(
-//   project,
-//   path.resolve(__dirname, "../templates/" + template),
-//   process.cwd(),
-//   function(err) {
-//     if (err) throw new Error(err);
-//     console.log("done");
-//   }
-// );

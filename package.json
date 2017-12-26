@@ -1,6 +1,6 @@
 {
   "name": "koajs-cli",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A simple CLI for scaffolding Koa.js projects.",
   "main": "index.js",
   "preferGlobal": true,

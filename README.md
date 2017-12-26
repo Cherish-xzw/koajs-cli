@@ -21,9 +21,7 @@ koa list # list available official templates
 
 ## Official templates
 
-- [webpack](https://github.com/koajs-templates/webpack) - A simple koa2 boilerplate based on webpack3
-
-- [vue-webpack](https://github.com/koajs-templates/vue-webpack) - An admin application template using koa2 and vue.
+- [koajs-templates](https://github.com/koajs-templates) - A collection of koa2 boilerplate with powerful UI library.
 
 ## License
 
